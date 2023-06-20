@@ -1,22 +1,21 @@
-public class Main
-{
-    //Questions
-    //1. Should I have deployThreads throw an interrupted exception?
-    //2. Is the way I handled the ConcurrentModificationException the most efficient way to do so?
-    //3. 
+import data.DataFile;
+import data.DataStore;
+import spider.DomainCrawler;
+import spider.Spider;
 
-    public static void main(String[] args)
-    {
-        DatabaseManager dbManager = new DatabaseManager("jdbc:sqlserver://mco364.ckxf3a0k0vuw.us-east-1.rds.amazonaws.com;"
-                + "database=MichaelTanami;"
-                + "user=" + System.getenv("WSDB_USERNAME") + ";"
-                + "password=" + System.getenv("WSDB_PASSWORD") + ";"
-                + "encrypt=false;"
-                + "trustServerCertificate=false;"
-                + "loginTimeout=30;", "WS_Emails");
-        WebSpider ws = new WebSpider(dbManager);
+import java.nio.file.Path;
 
-        ws.deployThreads("https://www.touro.edu/", 512);
+public class Main {
+
+    public static void main(String[] args) {
+        DataStore dataStore = new DataFile("testemails.txt", Path.of("./src"));
+        Spider spider = new DomainCrawler(75, dataStore);
+
+        try {
+            spider.crawl("https://ou.org");
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
 

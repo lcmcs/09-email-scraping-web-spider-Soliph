@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="MainTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2021-06-01T13:34:59" hostname="RazerS09" time="0.416">
-  <properties/>
-  <testcase name="getHyperlinksTest" classname="MainTest" time="0.416"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
