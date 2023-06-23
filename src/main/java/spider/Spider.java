@@ -62,6 +62,7 @@ public class Spider {
         ExecutorService threadPool = Executors.newFixedThreadPool(determineThreadCount());
 
         while (isHungry() && !isExhausted()) {
+
             try { String url = linksToVisit.take(); threadPool.execute(new Spiderling(url)); visitedLinks.add(url); }
             catch (InterruptedException e) { e.printStackTrace(); }
 
