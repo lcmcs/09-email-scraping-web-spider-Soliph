@@ -25,8 +25,8 @@ public class Scraper {
      * @throws IllegalStateException if the {@code Scraper} has not yet established a connection to a URL.
      */
     public Set<String> getEmails() {
-        if (this.doc == null) throw new IllegalStateException("Cannot scrape for emails when no established has " +
-                "been made to a URL");
+        if (this.doc == null) throw new IllegalStateException("No connection to a URL has been established. Cannot" +
+                "scrape for emails");
 
         Set<String> emailSet = new HashSet<>();
         Matcher matcher = EMAIL_REGEX.matcher(doc.body().html());
@@ -41,17 +41,17 @@ public class Scraper {
      * @return Set of unique links scraped from pre-set URL
      * @throws IllegalStateException if the {@code Scraper} has not yet established a connection to a URL.
      */
-    public Set<String>getHyperlinks() {
+    public Set<String> getHyperlinks() {
         if (this.doc == null) throw new IllegalStateException("Cannot scrape for emails when no established has " +
                 "been made to a URL");
 
-        Set<String> linkList = new HashSet<>();
+        Set<String> linkSet = new HashSet<>();
         Elements links = doc.select("a[href]");
         for (Element link : links) {
-            linkList.add(link.attr("abs:href"));
+            linkSet.add(link.attr("abs:href"));
         }
 
-        return linkList;
+        return linkSet;
     }
 
     /**

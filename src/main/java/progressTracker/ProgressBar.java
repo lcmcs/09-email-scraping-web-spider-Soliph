@@ -17,7 +17,12 @@ public class ProgressBar extends Thread {
     }
 
     public void completeProgress() {
-        this.currentProgress = this.totalProgress + 1;
+        this.currentProgress = totalProgress + 1;
+        System.out.print("\r[");
+        for (int i = 0; i < progressBarWidth; i++) {
+            System.out.print("#");  // Completed block character
+        }
+        System.out.print("] " + 100 + "%\n");
     }
 
     @Override
