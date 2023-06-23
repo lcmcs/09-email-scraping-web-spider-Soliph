@@ -42,14 +42,12 @@ public class Scraper {
      * @throws IllegalStateException if the {@code Scraper} has not yet established a connection to a URL.
      */
     public Set<String> getHyperlinks() {
-        if (this.doc == null) throw new IllegalStateException("Cannot scrape for emails when no established has " +
-                "been made to a URL");
+        if (this.doc == null) throw new IllegalStateException("No connection to a URL has been established. Cannot" +
+                "scrape for links");
 
         Set<String> linkSet = new HashSet<>();
         Elements links = doc.select("a[href]");
-        for (Element link : links) {
-            linkSet.add(link.attr("abs:href"));
-        }
+        links.forEach(link -> linkSet.add(link.attr("abs:href")));
 
         return linkSet;
     }

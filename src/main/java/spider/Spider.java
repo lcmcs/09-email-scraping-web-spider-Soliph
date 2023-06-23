@@ -56,18 +56,18 @@ public class Spider {
      * @param startUrl The URL to begin scraping from.
      * @throws InterruptedException will throw interrupted exception if threadpool is interrupted.
      */
-    public boolean hunt(String startUrl) throws InterruptedException {
+    public boolean hunt(String startUrl) {
         this.progressBar.start();
         linksToVisit.add(startUrl); // Load initial URL into queue
         ExecutorService threadPool = Executors.newFixedThreadPool(determineThreadCount());
 
         while (isHungry() && !isExhausted()) {
-            String url = linksToVisit.take();
-            threadPool.execute(new Spiderling(url));
-            visitedLinks.add(url);
+            try { String url = linksToVisit.take(); threadPool.execute(new Spiderling(url)); visitedLinks.add(url); }
+            catch (InterruptedException e) { e.printStackTrace(); }
 
             progressBar.updateProgress(capturedEmails.size());
         }
+
         threadPool.shutdownNow();
         progressBar.completeProgress();
         logCompletion();
@@ -88,11 +88,11 @@ public class Spider {
     }
 
     private int determineThreadCount() {
-        if (desiredEmailAmount < 100)  return 32;
+        if      (desiredEmailAmount < 100)  return 32;
         else if (desiredEmailAmount < 500)  return 64;
         else if (desiredEmailAmount < 1000) return 128;
         else if (desiredEmailAmount < 5000) return 256;
-        else return 512;
+        else                                return 512;
     }
 
     private boolean isHungry() {

@@ -21,6 +21,6 @@ public interface DataStore {
      * Can and should be overwritten if logging should take place differently.
      */
     default void logSave() {
-        System.out.printf("\nSaving data to %s...", getName());
+        System.out.printf("Saving data to %s...\n", getName());
     }
 }
