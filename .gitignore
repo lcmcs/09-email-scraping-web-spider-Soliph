@@ -1,4 +1,5 @@
 # Project exclude paths
+.vscode/
 .idea/
 .gradle/
 gradle/

@@ -40,7 +40,7 @@ public class Main {
         };
 
         Spider spider = new Spider(100, dataStore, basicWebcrawlerFilter);
-        spider.hunt("https://www.ahavastorah.org/");
+        spider.hunt("https://www.touro.edu/");
 
         System.exit(0);
     }
