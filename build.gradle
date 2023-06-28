@@ -1,5 +1,9 @@
 plugins {
-    id 'java'
+    id 'application'
+}
+apply plugin: "java"
+ext {
+    javaMainClass = "Main"
 }
 
 group 'org.example'
@@ -27,4 +31,11 @@ sourceSets {
             srcDirs = ["src/main/resources"]
         }
     }
+}
+
+task runWithJavaExec(type: JavaExec) {
+    group = "Execution"
+    description = "Run the main class with JavaExecTask"
+    classpath = sourceSets.main.runtimeClasspath
+    main = javaMainClass
 }

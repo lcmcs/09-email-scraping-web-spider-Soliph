@@ -39,8 +39,8 @@ public class Main {
             }
         };
 
-        Spider spider = new Spider(75, dataStore, basicWebcrawlerFilter);
-        spider.hunt("https://www.touro.edu/");
+        Spider spider = new Spider(100, dataStore, basicWebcrawlerFilter);
+        spider.hunt("https://www.ahavastorah.org/");
 
         System.exit(0);
     }
