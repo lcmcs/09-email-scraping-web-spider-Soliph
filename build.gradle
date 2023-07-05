@@ -1,9 +1,19 @@
 plugins {
-    id 'java'
+    id 'application'
+}
+apply plugin: "java"
+ext {
+    javaMainClass = "Main"
 }
 
 group 'org.example'
 version '1.0-SNAPSHOT'
+
+java {
+  toolchain {
+    languageVersion.set(JavaLanguageVersion.of(17))
+  }
+}
 
 repositories {
     mavenCentral()
@@ -12,6 +22,7 @@ repositories {
 dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter:5.8.1'
     implementation 'org.jsoup:jsoup:1.15.3'
+    implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '11.2.3.jre17'
 }
 
 sourceSets {
@@ -20,4 +31,11 @@ sourceSets {
             srcDirs = ["src/main/resources"]
         }
     }
+}
+
+task runWithJavaExec(type: JavaExec) {
+    group = "Execution"
+    description = "Run the main class with JavaExecTask"
+    classpath = sourceSets.main.runtimeClasspath
+    main = javaMainClass
 }

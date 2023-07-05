@@ -1,5 +1,9 @@
 # Project exclude paths
-/.gradle/
-/build/
-/build/classes/java/main/
-/build/classes/java/test/
+.vscode/
+.idea/
+.gradle/
+gradle/
+build/
+lib/
+bin/
+AllEmails.txt
